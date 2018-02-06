@@ -29,13 +29,14 @@ public class PrimeTwins {
     }
 
     public boolean containsMiddle(ArrayList<PrimeTwins> list) {
-        for (PrimeTwins pair : list) {// TODO Hier liegt der Fehler
+        for (PrimeTwins pair : list) {
             //System.out.println(pair.first);
             if ((pair != null) && (pair.getMiddle() == (first + second))) {
-                System.out.println(pair.getMiddle() + "=" + getSum());
+                System.out.println("Middle of Next Chain: "+ pair.getMiddle() + " = " + "\n" +  "Sum of Prime Twins: "+ getSum());
                 return true;
             }
         }
+        System.out.println("::::::::::::::::::::::::::");
         return false;
     }
 
