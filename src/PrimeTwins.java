@@ -20,7 +20,7 @@ public class PrimeTwins {
         return second;
     }
 
-    private int getSum() {
+    public int getSum() {
         return first + second;
     }
 
@@ -29,14 +29,11 @@ public class PrimeTwins {
     }
 
     public boolean containsMiddle(ArrayList<PrimeTwins> list) {
-        for (PrimeTwins pair : list) {// TODO Hier leigt der Fehler
-            System.out.println(pair.first);
+        for (PrimeTwins pair : list) {// TODO Hier liegt der Fehler
+            //System.out.println(pair.first);
             if ((pair != null) && (pair.getMiddle() == (first + second))) {
                 System.out.println(pair.getMiddle() + "=" + getSum());
                 return true;
-            } else {
-                System.out.println("--");
-                return false;
             }
         }
         return false;

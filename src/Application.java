@@ -18,13 +18,13 @@ public class Application {
 
     public ArrayList<Integer> getListOfPrimes() {
         ArrayList<Integer> listOfPrimes = new ArrayList<Integer>();
-        for (int number = 2; number <= 14; number++) {
+        for (int number = 2; number <= 100000; number++) {
             if (isPrime(number)) {
                 listOfPrimes.add(number);
-                System.out.println(number);
+        //        System.out.println(number);
             }
         }
-        System.out.println("ende");
+       // System.out.println("ende");
         return listOfPrimes;
     }
 
@@ -56,13 +56,16 @@ public class Application {
         for (int index = 0; index <= list.size() - 2; index++) {
           //  for (int i = index; index <= list.size() -2 ; i++){
                 //list.get(index).containsMiddle(list);
+
                 if (list.get(index).containsMiddle(list)){
-                    System.out.println("Fist  :" + list.get(index).getFirst());
-                    System.out.println("Second:" + list.get(index).getSecond());
-                    System.out.println("++++++++++++++++++++");
-                    System.out.println("FirstN: " + list.get(index).getFirst());
-                    System.out.println("Middle: " + list.get(index).getMiddle());
-                    System.out.println("SecondN:" + list.get(index).getSecond());
+                    System.out.println("Twinpair (Beginn of Chain): " + list.get(index).getFirst() + ","  + list.get(index).getSecond());
+                    System.out.println("Sum of Twinpair:" + list.get(index).getSum());
+                   // System.out.println("Fist  :" + list.get(index).getFirst());
+                   // System.out.println("Second:" + list.get(index).getSecond());
+                   // System.out.println("++++++++++++++++++++");
+                   // System.out.println("FirstN: " + list.get(index).getFirst());
+                   // System.out.println("Middle: " + list.get(index).getMiddle());
+                   // System.out.println("SecondN:" + list.get(index).getSecond());
                     System.out.println("=============");
                 }
 
