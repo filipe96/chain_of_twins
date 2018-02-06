@@ -12,13 +12,13 @@ public class Application {
         ArrayList<PrimeTwins> listOfTwins = new ArrayList<>();
         listOfTwins = findPrimeTwins(getListOfPrimes());
 
-        findChains(listOfTwins);
+        aNewHope(listOfTwins);
     }
 
 
     public ArrayList<Integer> getListOfPrimes() {
         ArrayList<Integer> listOfPrimes = new ArrayList<Integer>();
-        for (int number = 2; number <= 100000; number++) {
+        for (int number = 2; number <= 3000; number++) {
             if (isPrime(number)) {
                 listOfPrimes.add(number);
         //        System.out.println(number);
@@ -39,7 +39,7 @@ public class Application {
         return true;
     }
 
-    public ArrayList<PrimeTwins> findPrimeTwins(ArrayList<Integer> list) {
+    public ArrayList<PrimeTwins> findPrimeTwins(ArrayList<Integer> list) {  //Works!
         //prime-2 = prime
         ArrayList<PrimeTwins> primeTwinsArrayList = new ArrayList<>();
         for (int index = 0; index <= list.size() - 2; index++) {
@@ -52,44 +52,39 @@ public class Application {
         return primeTwinsArrayList;
     }
 
-    public void findChains(ArrayList<PrimeTwins> list) {
+    public ArrayList<ArrayList<Integer>> findChains(ArrayList<PrimeTwins> list) {  //Problem: Only finds neighbor
+        ArrayList<ArrayList<Integer>> fuckingContainerList = new ArrayList<>();
         for (int index = 0; index <= list.size() - 2; index++) {
-          //  for (int i = index; index <= list.size() -2 ; i++){
-                //list.get(index).containsMiddle(list);
 
-                if (list.get(index).containsMiddle(list)){
-                    System.out.println("Twinpair (Beginn of Chain): " + list.get(index).getFirst() + ","  + list.get(index).getSecond());
-                    System.out.println("Sum of Twinpair:" + list.get(index).getSum());
-                   // System.out.println("Fist  :" + list.get(index).getFirst());
-                   // System.out.println("Second:" + list.get(index).getSecond());
-                   // System.out.println("++++++++++++++++++++");
-                   // System.out.println("FirstN: " + list.get(index).getFirst());
-                   // System.out.println("Middle: " + list.get(index).getMiddle());
-                   // System.out.println("SecondN:" + list.get(index).getSecond());
-                    System.out.println("=============");
-                }
 
-            //}
+                 ArrayList<Integer> s =   hasAChainLink(list, index);
+                 fuckingContainerList.add(s);
+
         }
+        return fuckingContainerList;
+    }
 
+    private void aNewHope(ArrayList<PrimeTwins> list){
+        ArrayList<ArrayList<Integer>> fuckingContainerList = new ArrayList<>();
+        for (int x = 0; x <= list.size() - 2; x++) {
+            for (int y = x; y < list.size(); y++){ //code can be better
+                boolean a = list.get(x).getSum() == list.get(y).getMiddle();
+                if(a) {
+                    System.out.println("First : " + list.get(x).getFirst());
+                    System.out.println("Second: " + list.get(x).getSecond());
+                    System.out.println("First : " + list.get(y).getFirst());
+                    System.out.println("Second: " + list.get(y).getSecond());
+                }
+            }
+
+        }
     }
 
 
-    public boolean hasAChainLink(ArrayList<PrimeTwins> list, int index) {
-        return list.get(index).containsMiddle(list);
+    public ArrayList<Integer> hasAChainLink(ArrayList<PrimeTwins> list, int index) {
+        return list.get(index).findChainIndexes(list);
     }
-   // public PrimeTwins findNextChainLink(ArrayList <PrimeTwins> list, int index){
-   //     return list.get(index).getNextChainLink(list);
-    //}
 
-   // public void  printOut(ArrayList<ArrayList<PrimeTwins>> list){
-   //     for (PrimeTwins pair:
-   //          list) {
-   //         if(pair.getHasANextChainLink()  ) {
-   //             System.out.println(pair.getFirst() + pair.getSecond());
-   //         }
-        // }
-   // }
 
 
 }
