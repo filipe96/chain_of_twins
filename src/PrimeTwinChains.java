@@ -1,42 +1,38 @@
-import java.util.concurrent.CyclicBarrier;
 import java.util.ArrayList;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 
-public class Application {
+public class PrimeTwinChains implements Runnable {
     private CyclicBarrier cyclicBarrier;
-    private ArrayList<PrimeTwinChains> listOfChains;
+    private int min;
+    private int max;
 
-    public Application() {
-        cyclicBarrier = new CyclicBarrier(Configuration.instance.maximumNumberOfThreads);
-        listOfChains = new ArrayList<>();
+    public PrimeTwinChains(CyclicBarrier cyclicBarrier, int min, int max){
+        this.cyclicBarrier = cyclicBarrier;
+        this.min = min;
+        this.max = max;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("PrimeTwinChains started");
+
+
+
+                        try {
+                           cyclicBarrier.await();
+                       } catch (InterruptedException ie) {
+                           ie.printStackTrace();
+                      } catch (BrokenBarrierException bbe) {
+            bbe.printStackTrace();
+                       }
 
     }
 
-    public void build(){
-        System.out.println("phase 01 - build");
-
-        int minimum = 3;
-        int stepSize = (Configuration.instance.maximum - minimum) / Configuration.instance.maximumNumberOfThreads;
-        int maximum = minimum + stepSize;
-
-        for (int i = 0;i < Configuration.instance.maximumNumberOfThreads;i++){
-            listOfChains.add(new PrimeTwinChains(cyclicBarrier, minimum, maximum));
-            minimum = maximum + 1;
-            maximum = minimum + stepSize;
-        }
-    }
-
-    public void execute() {
-        for (PrimeTwinChains list: listOfChains) {
-            new Thread(list).start();
-        }
-    }
-
-/*
-    public ArrayList<Integer> getListOfPrimes(int min, int max ) {
+    public ArrayList<Integer> getListOfPrimes() {
         ArrayList<Integer> listOfPrimes = new ArrayList<>();
         for (int number = min; number <= max; number++) {
             if (isPrime(number)) {
-                System.out.println(number);
                 listOfPrimes.add(number);
             }
         }
@@ -87,13 +83,6 @@ public class Application {
         }
         return chainList;
     }
-*/
-    public static void main(String[] args) {
-        Application app = new Application();
-        app.build();
-        app.execute();
-    }
-
 
 
 
