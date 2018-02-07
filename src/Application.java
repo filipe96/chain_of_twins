@@ -12,8 +12,7 @@ public class Application {
         ArrayList<PrimeTwins> listOfTwins = new ArrayList<>();
         listOfTwins = findPrimeTwins(getListOfPrimes());
 
-        //aNewHope(listOfTwins);
-        findChain(listOfTwins, 0);
+        System.out.println((aNewHope(listOfTwins)));
 
         //Ausgabe nur wenn sizeOf größer 2
 
@@ -64,30 +63,28 @@ public class Application {
         return fuckingContainerList;
     }
 
-    private void aNewHope(ArrayList<PrimeTwins> list){
-        ArrayList<ArrayList<PrimeTwins>> fuckingContainerList = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> aNewHope(ArrayList<PrimeTwins> list){
+        ArrayList<ArrayList<Integer>> fuckingContainerList = new ArrayList<>();
         for (int x = 0; x <= list.size() - 2; x++) {
-            findChain(list, x);
+            fuckingContainerList.add(findChain(list, x));
         }
+        return fuckingContainerList;
     }
 
-    public void  findChain (ArrayList<PrimeTwins> list, int index) {
+    public ArrayList<Integer>  findChain (ArrayList<PrimeTwins> list, int index) {
         ArrayList <Integer> chainList = new ArrayList<>();
         chainList.add(list.get(index).getFirst());
         chainList.add(list.get(index).getSecond());
         int x;// = index;
         for ( x = 0; x < list.size() ; x++) {
             if(list.get(index).getSum() == list.get(x).getMiddle()){
-                System.out.println("Sum"+ list.get(index).getSum()  + "Middle:" + list.get(x).getMiddle());
-                System.out.println("index" + index);
-                System.out.println("x" + x);
                 index = x;
                 chainList.add(list.get(x).getFirst());
                 chainList.add(list.get(x).getSecond());
 
             }
         }
-        System.out.println(chainList);
+        return chainList;
     }
 
 
