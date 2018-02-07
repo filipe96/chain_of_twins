@@ -17,7 +17,7 @@ public class Application {
 
         //Ausgabe nur wenn sizeOf größer 2
 
-3
+
     }
 
 
