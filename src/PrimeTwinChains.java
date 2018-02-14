@@ -19,7 +19,7 @@ public class PrimeTwinChains implements Runnable {
 
         ArrayList<Integer> primeList = getListOfPrimes();
         ArrayList<PrimeTwins> primeTwinList = findPrimeTwins(primeList);
-        outPut(aNewHope(primeTwinList));
+        outPut(iteratePrimeTwins(primeTwinList));
 
                         try {
                            cyclicBarrier.await();
@@ -63,12 +63,12 @@ public class PrimeTwinChains implements Runnable {
     }
 
 
-    private ArrayList<ArrayList<Integer>> aNewHope(ArrayList<PrimeTwins> list) {
-        ArrayList<ArrayList<Integer>> fuckingContainerList = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> iteratePrimeTwins(ArrayList<PrimeTwins> list) {//TODO unbennenen
+        ArrayList<ArrayList<Integer>> containerList = new ArrayList<>();
         for (int x = 0; x <= list.size() - 2; x++) {
-            fuckingContainerList.add(findChain(list, x));
+            containerList.add(findChain(list, x));
         }
-        return fuckingContainerList;
+        return containerList;
     }
 
     private ArrayList<Integer> findChain(ArrayList<PrimeTwins> list, int index) {
