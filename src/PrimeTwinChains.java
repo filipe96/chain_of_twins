@@ -17,7 +17,9 @@ public class PrimeTwinChains implements Runnable {
     public void run() {
         System.out.println("PrimeTwinChains started");
 
-
+        ArrayList<Integer> primeList = getListOfPrimes();
+        ArrayList<PrimeTwins> primeTwinList = findPrimeTwins(primeList);
+        outPut(aNewHope(primeTwinList));
 
                         try {
                            cyclicBarrier.await();
@@ -78,12 +80,18 @@ public class PrimeTwinChains implements Runnable {
                 index = x;
                 chainList.add(list.get(x).getFirst());
                 chainList.add(list.get(x).getSecond());
-
             }
         }
         return chainList;
     }
 
+    private void outPut(ArrayList<ArrayList<Integer>> list){
+        for (ArrayList chain:
+             list) {
+            if(chain.size() > 2){
+                System.out.println(chain);
+            }
 
-
+        }
+    }
 }

@@ -1,5 +1,5 @@
 public enum Configuration {
     instance;
     int maximumNumberOfThreads = Runtime.getRuntime().availableProcessors();
-    int maximum = 100000;
+    int maximum = 1_000_0000;
 }
