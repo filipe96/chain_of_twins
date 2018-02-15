@@ -1,9 +1,14 @@
+package main;
+
+import task.PrimeTwinChains;
+
 import java.util.concurrent.CyclicBarrier;
 import java.util.ArrayList;
 
+
 public class Application {
     private CyclicBarrier cyclicBarrier;
-    private ArrayList<PrimeTwinChains> listOfChains;
+    private ArrayList<PrimeTwinChains> listOfChains; //TODO change name
 
     public Application() {
         cyclicBarrier = new CyclicBarrier(Configuration.instance.maximumNumberOfThreads);
@@ -18,8 +23,10 @@ public class Application {
         int stepSize = (Configuration.instance.maximum - minimum) / Configuration.instance.maximumNumberOfThreads;
         int maximum = minimum + stepSize;
 
-        for (int i = 0;i < Configuration.instance.maximumNumberOfThreads;i++){
+        for (int i = 0; i < Configuration.instance.maximumNumberOfThreads; i++){
             listOfChains.add(new PrimeTwinChains(cyclicBarrier, minimum, maximum));
+            System.out.println("Minimum:"+ minimum);
+            System.out.println("Maximum:" + maximum);
             minimum = maximum + 1;
             maximum = minimum + stepSize;
         }
@@ -52,11 +59,11 @@ public class Application {
         return true;
     }
 
-    private ArrayList<PrimeTwins> findPrimeTwins(ArrayList<Integer> list) {  //Works!
-        ArrayList<PrimeTwins> primeTwinsArrayList = new ArrayList<>();
+    private ArrayList<task.PrimeTwins> findPrimeTwins(ArrayList<Integer> list) {  //Works!
+        ArrayList<task.PrimeTwins> primeTwinsArrayList = new ArrayList<>();
         for (int index = 0; index <= list.size() - 2; index++) {
             if (list.get(index) == list.get(index + 1) - 2) {
-                PrimeTwins pair = new PrimeTwins(list.get(index),
+                task.PrimeTwins pair = new task.PrimeTwins(list.get(index),
                         list.get(index + 1));
                 primeTwinsArrayList.add(pair);
             }
@@ -65,7 +72,7 @@ public class Application {
     }
 
 
-    private ArrayList<ArrayList<Integer>> aNewHope(ArrayList<PrimeTwins> list) {
+    private ArrayList<ArrayList<Integer>> aNewHope(ArrayList<task.PrimeTwins> list) {
         ArrayList<ArrayList<Integer>> fuckingContainerList = new ArrayList<>();
         for (int x = 0; x <= list.size() - 2; x++) {
             fuckingContainerList.add(findChain(list, x));
@@ -73,7 +80,7 @@ public class Application {
         return fuckingContainerList;
     }
 
-    private ArrayList<Integer> findChain(ArrayList<PrimeTwins> list, int index) {
+    private ArrayList<Integer> findChain(ArrayList<task.PrimeTwins> list, int index) {
         ArrayList<Integer> chainList = new ArrayList<>();
         chainList.add(list.get(index).getFirst());
         chainList.add(list.get(index).getSecond());
