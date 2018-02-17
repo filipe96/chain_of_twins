@@ -1,7 +1,5 @@
 package task;
-
 import java.util.ArrayList;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
 public class PrimeTwinChains implements Runnable {
@@ -15,6 +13,7 @@ public class PrimeTwinChains implements Runnable {
         this.max = max;
     }
 
+    //Aus Gründen der Testbarkeit wurde darauf verzichtet die Methoden anstandsmäßig privat zu lassen
     @Override
     public void run() {
         System.out.println("task.PrimeTwinChains started");
@@ -22,18 +21,10 @@ public class PrimeTwinChains implements Runnable {
         ArrayList<Integer> primeList = getListOfPrimes();
         ArrayList<PrimeTwins> primeTwinList = findPrimeTwins(primeList);
         primeList.clear();
-        outPut(iteratePrimeTwins(primeTwinList));
+        getFinalList(iteratePrimeTwins(primeTwinList));
         primeTwinList.clear();
-
-    /*    try {
-            cyclicBarrier.await();
-        } catch (InterruptedException ie) {
-            ie.printStackTrace();
-        } catch (BrokenBarrierException bbe) {
-            bbe.printStackTrace();
-        } */
-
     }
+
 
     public ArrayList<Integer> getListOfPrimes() {
         ArrayList<Integer> listOfPrimes = new ArrayList<>();
@@ -45,7 +36,7 @@ public class PrimeTwinChains implements Runnable {
         return listOfPrimes;
     }
 
-    private boolean isPrime(int number) {
+    public boolean isPrime(int number) {
         if (number % 2 == 0) return false;
         for (int i = 3; i * i <= number; i += 2) {
             if (number % i == 0)
@@ -54,23 +45,20 @@ public class PrimeTwinChains implements Runnable {
         return true;
     }
 
-    private ArrayList<PrimeTwins> findPrimeTwins(ArrayList<Integer> list) {  //Works!
+    public ArrayList<PrimeTwins> findPrimeTwins(ArrayList<Integer> list) {  //Works!
         System.out.println("Search for Prime Twins started");
         ArrayList<PrimeTwins> primeTwinsArrayList = new ArrayList<>();
         for (int index = 0; index <= list.size() - 2; index++) {
             if (list.get(index) == list.get(index + 1) - 2) {
                 PrimeTwins pair = new PrimeTwins(list.get(index), list.get(index + 1));
                 primeTwinsArrayList.add(pair);
-                //System.out.println(pair);
-            //}else {
-            //    list.remove(index);
             }
         }
         return primeTwinsArrayList;
     }
 
 
-    private ArrayList<ArrayList<Integer>> iteratePrimeTwins(ArrayList<PrimeTwins> list) {
+    public ArrayList<ArrayList<Integer>> iteratePrimeTwins(ArrayList<PrimeTwins> list) {
         System.out.println("Search for Chains started");
         ArrayList<ArrayList<Integer>> containerList = new ArrayList<>();
         for (int x = 0; x <= list.size() - 2; x++) {
@@ -95,13 +83,14 @@ public class PrimeTwinChains implements Runnable {
         return chainList;
     }
 
-    private void outPut(ArrayList<ArrayList<Integer>> list) {
+    public   ArrayList<ArrayList<Integer>> getFinalList(ArrayList<ArrayList<Integer>> list) {
+        ArrayList<ArrayList<Integer>> finalList = new ArrayList<>();
         for (ArrayList chain :
                 list) {
             if (chain.size() > 2) {
-                System.out.println(chain);
+                finalList.add(chain);
             }
-
         }
+        return finalList;
     }
 }
