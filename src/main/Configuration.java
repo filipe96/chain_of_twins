@@ -3,7 +3,6 @@ package main;
 public enum Configuration {
     instance;
     int maximumNumberOfThreads = Runtime.getRuntime().availableProcessors();
-    int maximum = 300000000;
-                //120891481
-                //74934241
+    int maximum =   250000000;  //run for 15 minutes (tested with a four core processor)
+                  //500000000;  //run for full processor capacity
 }
